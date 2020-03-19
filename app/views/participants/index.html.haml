@@ -1,0 +1,129 @@
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Bootstrap Example
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+  %body
+    %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+      / Brand
+      / %a.navbar-brand{:href => "dashboards_path"} StandUp
+      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      / Links
+      %ul.navbar-nav
+        %li.nav-item
+          / %a.nav-link{:href => "#"} Home
+          #{link_to "Home", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Workflows", schedules_path,class: "nav-link"}
+          / %a.nav-link{:href => "#"} Workflows
+        %li.nav-item
+          #{link_to "Teams", teams_path,class: "nav-link"}
+        / Dropdown
+
+    %br/
+    %h4.pl-3 Workflow Builder
+    %hr/
+    .container
+      .row
+        %aside.col-sm-3
+          .card
+            %article.card-group-item
+              %header.card-header
+                %h6.title Steps
+              .filter-content
+                .list-group.list-group-flush
+                %span
+                  #{link_to "Setup", dashboards_path,class: "list-group-item"}
+                  / %a.list-group-item{"data-toggle" => "pill", :href => "dashboards_path"}
+                  /   Setup
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Schedule", schedules_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "schedules_path"}
+                  /   Schedule
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Builder", builders_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu3"}
+                  /   Builder
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Pariticipants", participants_path,class: "list-group-item active"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu4"}
+                  /   Pariticipants
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Notifications", schedules_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu5"}
+                  /   Notifications
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Review", schedules_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu6"}
+                  /   Review
+                  /   %span.float-right.badge.badge-light.round
+                / list-group .//
+            / card-group-item.//
+          / card.//
+        / col.//
+        .col-sm-9
+          =form_for(:builder, html: { class: "form-horizontal", role: "form" }) do |f|
+            %aside.col-sm-12
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Respondents
+                  .filter-content
+                    .card-body
+                      %p who should complete the workflow?
+                      .form-row
+                        .form-group.col-md-12
+                          =f.text_field :respondents, class: "form-control", list: "browsers", id:"user_list"
+                          %datalist#browsers
+                        .user_list
+
+                    / card-body.//
+                / card-group-item.//
+              / card.//
+            / col.//
+
+
+
+            %br/
+            %aside.col-sm-12
+              .card
+                %button.btn.btn-primary Next
+              %br
+              %p
+                %span
+                  %i.fa.fa-eye  &nbsp; Everyone in your organization will see your responses.
+              / card.//
+            / col.//
+      / row.//
+    / container.//
+    :javascript
+      $(document).ready(function(){
+        $('#browsers').empty();
+        $('#browsers2').empty();
+        $(".table").dataTable();
+
+          $.ajax({
+            type: "GET",
+            url: "/users/user_ajax",
+            data: "uname=sunil",
+            dataType: "json",
+            success: function(repsonse){
+                console.log(repsonse);
+                $.each(repsonse, function(i, item) {
+
+                  $("#browsers").append($("<option data-value="+item.id+">").text(item.name));
+                });
+            },
+            error: function(repsonse){alert("Error");}
+           })
+
+
+      });
+
+

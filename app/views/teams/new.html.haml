@@ -1,0 +1,59 @@
+
+
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Standup
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+   
+  %body
+    %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+      / Brand
+      / %a.navbar-brand{:href => "dashboards_path"} StandUp
+      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      / Links
+      %ul.navbar-nav
+        %li.nav-item
+          / %a.nav-link{:href => "#"} Home
+          #{link_to "Home", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Workflows", schedules_path,class: "nav-link"}
+          / %a.nav-link{:href => "#"} Workflows
+        %li.nav-item
+          #{link_to "Teams", teams_path,class: "nav-link"}
+        / Dropdown
+
+    %br/
+    %h4.text-center Team's List
+    %hr/
+
+    .container
+      #{link_to "Show Teams", teams_path,class: "pull-right"}
+      %div.offset-md-3
+        %div
+          .card
+            .card-header.bg-primary
+              Team Name
+            .card-body
+              Content
+
+        
+      
+
+
+
+
+       
+
+
+
+	      
+			     
+
+	
+				
+		        
+    
+
+

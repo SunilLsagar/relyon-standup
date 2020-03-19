@@ -1,0 +1,78 @@
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Bootstrap Example
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+  %body
+    %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      %ul.navbar-nav
+        %li.nav-item
+          #{link_to "Home", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Workflows", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Teams", teams_path,class: "nav-link"}
+    %br
+    %h4.text-center
+      Team's List
+    %hr
+    .container
+      .col.text-center
+        %a.btn.btn-primary.pull-right{"data-target" => "#smallModal", "data-toggle" => "modal", :href => "#"} New Team
+      #smallModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog.modal-sm
+        =form_for(@team, html: { class: "form-horizontal", role: "form" }) do |f|
+          .modal-content
+            .modal-header
+              %h4#myModalLabel.modal-title Create a new team
+              %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                %span{"aria-hidden" => "true"} ×
+            .modal-body
+              .form-row
+                .form-group.col-md-12
+                  =f.label :team_name
+                  =f.text_field :team_name, class: "form-control"
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+              %button.btn.btn-primary{:type => "submit"} Create Team
+    %br
+    .container
+      .table-responsive
+        %table#myTable{:class=> "table table-bordered"}
+          %thead
+            %tr
+              %th #
+              %th Team
+              %th Created At
+              %th Actions
+          %tbody
+            -@i=0
+            -@teams.each do |t|
+            -@i+=1
+              %tr
+                %td= @i
+                %td=link_to t.team_name, team_path(t)
+                %td= t.created_at.strftime('%d-%m-%Y')
+                %td
+                  =link_to "Edit", edit_team_path(t)
+                  =link_to "Delete", team_path(t), method: :delete,data: {confirm: "Do you want to delete?"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

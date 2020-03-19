@@ -1,0 +1,59 @@
+%section.login-block
+  .container
+    .row
+      .col-md-4.login-sec
+        %h2.text-center Sign Up Now
+
+        = form_for(@user, html: { class: "form-horizontal", role: "form" }) do |f|
+          .form-group
+            .control-label.col-md-2
+              = f.label :name
+            .col-md-10
+              = f.text_field :name, class: "form-control", placeholder: "Enter your name", autofocus: true
+          .form-group
+            .control-label.col-md-2
+              = f.label :email
+            .col-md-10
+              = f.email_field :email, class: "form-control", placeholder: "Enter your email"
+          .form-group
+            .control-label.col-md-2
+              = f.label :password
+            .col-md-10
+              = f.password_field :password, class: "form-control", placeholder: "Choose a password"
+          .form-group
+            .control-label.col-md-6
+              = f.label :password_confirmation, "Confirm Password"
+            .col-md-10
+              = f.password_field :password_confirmation,
+                class: "form-control", placeholder: "Confirm password"
+          .form-group
+            .col-md-offset-2.col-md-10
+              = f.submit(@user.new_record? ? "Create my account" : "Update my account", class: "btn btn-primary btn-lg btn-xlarge")
+              %br
+              #{link_to "U have an account? Sign in now!", root_path}
+
+      .col-md-8.banner-sec
+        #carouselExampleIndicators.carousel.slide{"data-ride" => "carousel"}
+          %ol.carousel-indicators
+            %li.active{"data-slide-to" => "0", "data-target" => "#carouselExampleIndicators"}
+            %li{"data-slide-to" => "1", "data-target" => "#carouselExampleIndicators"}
+            %li{"data-slide-to" => "2", "data-target" => "#carouselExampleIndicators"}
+          .carousel-inner{:role => "listbox"}
+            .carousel-item.active
+              %img.d-block.img-fluid{:alt => "First slide", :src => "https://static.pexels.com/photos/33972/pexels-photo.jpg"}/
+              .carousel-caption.d-none.d-md-block
+                .banner-text
+                  %h2 This is Heaven
+                  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            .carousel-item
+              %img.d-block.img-fluid{:alt => "First slide", :src => "https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg"}/
+              .carousel-caption.d-none.d-md-block
+                .banner-text
+                  %h2 This is Heaven
+                  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            .carousel-item
+              %img.d-block.img-fluid{:alt => "First slide", :src => "https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg"}/
+              .carousel-caption.d-none.d-md-block
+                .banner-text
+                  %h2 This is Heaven
+                  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

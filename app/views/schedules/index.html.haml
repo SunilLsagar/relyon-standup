@@ -1,0 +1,312 @@
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Bootstrap Example
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+  %body
+    %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+      / Brand
+      / %a.navbar-brand{:href => "dashboards_path"} StandUp
+      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      / Links
+      %ul.navbar-nav
+        %li.nav-item
+          #{link_to "Home", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Workflows", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Teams",teams_path,class: "nav-link"}
+        / Dropdown
+
+    %br/
+    %h4.pl-3 Workflow Builder
+    %hr/
+    .container
+      .row
+        %aside.col-sm-3
+          .card
+            %article.card-group-item
+              %header.card-header
+                %h6.title Steps
+              .filter-content
+                .list-group.list-group-flush
+                %span
+                  #{link_to "Setup", dashboards_path,class: "list-group-item"}
+                  / %a.list-group-item{"data-toggle" => "pill", :href => "dashboards_path"}
+                  /   Setup
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Schedule", schedules_path,class: "list-group-item active"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "schedules_path"}
+                  /   Schedule
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Builder", builders_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu3"}
+                  /   Builder
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Pariticipants", participants_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu4"}
+                  /   Pariticipants
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Notifications", schedules_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu5"}
+                  /   Notifications
+                  /   %span.float-right.badge.badge-light.round
+                %span
+                  #{link_to "Review", schedules_path,class: "list-group-item"}
+                  / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu6"}
+                  /   Review
+                  /   %span.float-right.badge.badge-light.round
+                / list-group .//
+            / card-group-item.//
+          / card.//
+        / col.//
+        .col-sm-9
+          =form_for(:schedule, html: { class: "form-horizontal", role: "form" }) do |f|
+            %aside.col-sm-12
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Frequency *
+                  .filter-content
+                    .card-body
+                      .form-row
+                        .form-group.col-md-12
+                          = f.select(:frequency, ['Weekly', 'Bi-Weekly','Monthly','Quarterly'], {}, { :class => 'form-control',:id=>'frequency' })
+                          / =f.select :frequency, options_for_select(['option1', 'option2']), { class: "form-control", prompt: 'select frequency' }
+                    / card-body.//
+                / card-group-item.//
+              / card.//
+            / col.//
+            %aside.col-sm-12#weekly
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Days Of Week *
+                  .filter-content
+                    .card-body
+                      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        / %h4 Days of Week *
+                        .row.seven-cols.bold
+                          .col-md-1.col-sm-1.col-xs-1
+                            Sun
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Sunday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Mon
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Monday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Tue
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Tuesday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Wed
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Wednesday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Thu
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Thursday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Fri
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Friday', false, class: ''
+                          .col-md-1.col-sm-1.col-xs-1
+                            Sat
+                            %br/
+                            = check_box_tag 'day_of_week[]', 'Saturday', false, class: ''
+
+                    / card-body.//
+                / card-group-item.//
+              / card.//
+            / col.//
+            %aside.col-sm-12#bi_weekly
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Days Of Week *
+                  .filter-content
+                    .card-body
+                      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        / %h4 Days of Week *
+                        .row.seven-cols.bold
+                          .col-md-1.col-sm-1.col-xs-1
+                            Sun
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Sunday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Mon
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Monday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Tue
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Tuesday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Wed
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Wednesday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Thu
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Thursday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Fri
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Friday'
+                          .col-md-1.col-sm-1.col-xs-1
+                            Sat
+                            %br/
+                            = radio_button_tag 'day_of_bi_week', 'Saturday'
+
+                    / card-body.//
+                / card-group-item.//
+              / card.//
+            / col.//
+            %aside.col-sm-12#month_day
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Day of Month*
+                  .filter-content
+                    .card-body
+                      .form-row
+                        .form-group.col-md-12
+                          / =f.label :purpose
+                          =f.text_field :day_of_month, class: "form-control month_day", placeholder: ""
+
+            %aside.col-sm-12#time_day
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title Time of Day*
+                  .filter-content
+                    .card-body
+                      .form-row
+                        .form-group.col-md-12
+                          / =f.label :purpose
+                          =f.text_field :time_of_day, class: "form-control time_day", placeholder: ""
+
+
+            #reminder
+              %br
+              %h3{:style => "margin-left: 2%;font:bold 16px/30px Georgia, serif;"} Reminders
+              %br
+              %p{:style => "margin-left: 2%;font:bold 16px/30px Georgia, serif;"} Send a second notification when a person doesn't respond in a certain time period
+              #reminder_content
+              %aside.col-sm-12#bi_weekly
+              .card
+                %article.card-group-item
+                  %header.card-header
+                    %h6.title
+                      Send a reminder  after
+                      %span 15 minutes
+                  .filter-content
+                    .card-body
+                      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+                        .row.seven-cols.bold
+                          .col-md-1.col-sm-1.col-xs-1
+                            15m
+                            %br/
+                            = radio_button_tag 'reminder', '15M'
+                          .col-md-1.col-sm-1.col-xs-1
+                            30m
+                            %br/
+                            = radio_button_tag 'reminder', '30M'
+                          .col-md-1.col-sm-1.col-xs-1
+                            1h
+                            %br/
+                            = radio_button_tag 'reminder', '1H'
+                          .col-md-1.col-sm-1.col-xs-1
+                            4h
+                            %br/
+                            = radio_button_tag 'reminder', '4H'
+                          .col-md-1.col-sm-1.col-xs-1
+                            12h
+                            %br/
+                            = radio_button_tag 'reminder', '12H'
+                          .col-md-1.col-sm-1.col-xs-1
+                            1d
+                            %br/
+                            = radio_button_tag 'reminder', '1D'
+                          .col-md-1.col-sm-1.col-xs-1
+                            custom
+                            %br/
+                            = radio_button_tag 'reminder', 'Custom'
+
+                    / card-body.//
+                / card-group-item.//
+              / card.//
+            / col.//
+
+
+
+            %br/
+            %button.btn.btn-outline-primary.pull-right#add_reminder{:style => "font:bold 16px/30px Georgia, serif;"} Add Reminder
+
+
+            %br/
+            %br/
+            %br/
+            %aside.col-sm-12
+              .card
+                %button.btn.btn-primary Next
+              / card.//
+            / col.//
+      / row.//
+    / container.//
+    :javascript
+      $(document).ready(function(e) {
+        $("#bi_weekly").hide();
+        $("#month_day").hide();
+        $("#reminder").hide();
+
+        $('.month_day').datepicker({
+          format: 'dd/mm/yyyy',
+          todayHighlight: true,
+          autoclose: true
+        });
+        $('.time_day').timepicker({
+          minTime: '09:00:00'
+        });
+
+
+        $( "#frequency" ).change(function() {
+          var frequency = $(this).val();
+          if(frequency == "Weekly"){
+            $("#bi_weekly").hide();
+            $("#weekly").show();
+          }
+          else if(frequency == "Bi-Weekly"){
+            $("#bi_weekly").show();
+            $("#weekly").hide();
+          }
+          else if(frequency == "Monthly"){
+            $("#bi_weekly").hide();
+            $("#weekly").hide();
+            $("#time_day").show();
+            $("#month_day").show();
+          }
+          else if(frequency == "Quarterly"){
+            $("#bi_weekly").hide();
+            $("#weekly").hide();
+            $("#time_day").show();
+            $("#month_day").hide();
+          }
+
+        });
+      });
+
+      $( "#add_reminder" ).click(function(e) {
+        e.preventDefault();
+        $("#reminder").show();
+      });
+
+
+
+    });

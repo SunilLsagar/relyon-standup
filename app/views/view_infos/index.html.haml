@@ -1,0 +1,78 @@
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Standup
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %link{:href => "https://rawgit.com/mervick/emojionearea/master/dist/emojionearea.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/emojione/1.5.0/assets/css/emojione.min.css", :rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"}
+    %script{:src => "https://rawgit.com/mervick/emojionearea/master/dist/emojionearea.js"}
+  %body
+    %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
+      / Brand
+      / %a.navbar-brand{:href => "dashboards_path"} StandUp
+      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      / Links
+      %ul.navbar-nav
+        %li.nav-item
+          / %a.nav-link{:href => "#"} Home
+          #{link_to "Home", schedules_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Workflows", schedules_path,class: "nav-link"}
+          / %a.nav-link{:href => "#"} Workflows
+        %li.nav-item
+          #{link_to "Teams", teams_path,class: "nav-link"}
+          %li.nav-item
+          #{link_to "Logout", logout_path,class: "nav-link pull-right"}
+        / Dropdown
+
+    %br/
+    %br
+    .container
+      %br
+      .table-responsive
+        %table#myTable{:class=> "table table-bordered"}
+          %thead
+            %tr
+              %th #
+              %th Respondents
+              %th SetUp Name
+              %th Icon
+              %th Purpose
+              %th Frequency
+              %th Day of Week
+              %th Day of Month
+              %th Day of Biweek
+              %th What did you accomplish yesterday?
+              %th What do you plan to complete today?
+              %th Do you have any blockers?
+              %th Kudos
+              %th Suggestions
+              %th Actions
+          %tbody
+            -@i=0
+            -@data.each do |t|
+            -@i+=1
+              %tr
+                %td= @i
+                %td= t.respondents
+                %td= t.setup_name
+                %td= t.icon
+                %td= t.purpose
+                %td= t.frequency
+                %td= t.day_of_week
+                %td= t.day_of_month
+                %td= t.day_of_bi_week
+                %td= t.answer1
+                %td= t.answer2
+                %td= t.answer3
+                %td= t.kudos
+                %td= t.suggestions
+                %td
+                  =link_to "Delete", view_info_path(t.id), method: :delete,data: {confirm: "Do you want to delete?"}
+
+  :javascript
+    $(".table").dataTable();
+
+
