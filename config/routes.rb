@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :builders
   resources :participants
   resources :view_infos
+  resources :notifications
 end

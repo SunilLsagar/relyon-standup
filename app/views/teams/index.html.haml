@@ -6,14 +6,16 @@
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
   %body
     %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
-      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      =image_tag("logo.png",  alt: "StandUp")
       %ul.navbar-nav
         %li.nav-item
-          #{link_to "Home", schedules_path,class: "nav-link"}
+          #{link_to "Home", dashboards_path,class: "nav-link"}
         %li.nav-item
-          #{link_to "Workflows", schedules_path,class: "nav-link"}
+          #{link_to "Workflows", dashboards_path,class: "nav-link"}
         %li.nav-item
           #{link_to "Teams", teams_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Logout", logout_path,class: "nav-link pull-right"}
     %br
     %h4.text-center
       Team's List
@@ -21,7 +23,7 @@
     .container
       .col.text-center
         %a.btn.btn-primary.pull-right{"data-target" => "#smallModal", "data-toggle" => "modal", :href => "#"} New Team
-      #smallModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", :role => "dialog", :tabindex => "-1"}
+      #smallModal.modal.fade.col-6.offset-md-3
         .modal-dialog.modal-sm
         =form_for(@team, html: { class: "form-horizontal", role: "form" }) do |f|
           .modal-content

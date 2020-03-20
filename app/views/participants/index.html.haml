@@ -8,17 +8,19 @@
     %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark
       / Brand
       / %a.navbar-brand{:href => "dashboards_path"} StandUp
-      #{link_to "StandUp", dashboards_path,class: "navbar-brand"}
+      =image_tag("logo.png",  alt: "StandUp")
       / Links
       %ul.navbar-nav
         %li.nav-item
           / %a.nav-link{:href => "#"} Home
-          #{link_to "Home", schedules_path,class: "nav-link"}
+          #{link_to "Home", dashboards_path,class: "nav-link"}
         %li.nav-item
-          #{link_to "Workflows", schedules_path,class: "nav-link"}
+          #{link_to "Workflows", dashboards_path,class: "nav-link"}
           / %a.nav-link{:href => "#"} Workflows
         %li.nav-item
           #{link_to "Teams", teams_path,class: "nav-link"}
+        %li.nav-item
+          #{link_to "Logout", logout_path,class: "nav-link pull-right"}
         / Dropdown
 
     %br/
@@ -54,12 +56,12 @@
                   /   Pariticipants
                   /   %span.float-right.badge.badge-light.round
                 %span
-                  #{link_to "Notifications", schedules_path,class: "list-group-item"}
+                  #{link_to "Notifications", notifications_path,class: "list-group-item"}
                   / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu5"}
                   /   Notifications
                   /   %span.float-right.badge.badge-light.round
                 %span
-                  #{link_to "Review", schedules_path,class: "list-group-item"}
+                  #{link_to "View Info", view_infos_path,class: "list-group-item"}
                   / %a.list-group-item.text-dark{"data-toggle" => "pill", :href => "#menu6"}
                   /   Review
                   /   %span.float-right.badge.badge-light.round
